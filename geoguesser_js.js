@@ -1,46 +1,3 @@
-index.html:
-----------
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset = "utf-8" />
-    <meta name = "viewport" content="width=device-width, initial-scale=1"/>
-    <title> HintGuessr </title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-    <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-      <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
-</head>
-<body>
-    <header class="topbar">
-        <div class="brand"> HintGuessr</div>
-        <div class="controls">
-            <button id="newRoundBtn"> New Round</button>
-            <button id="revealBtn" class="secondary"> Reveal Answer</button>
-        </div>
-    </header>
-    
-    <main class="layout">
-        <section class="panel">
-            <h2>Hints</h2>
-            <ol id="hints" class="hints"></ol>
-            
-            <div class="stats">
-                <div><span class="label"> Your error:</span> <span id="errorKm">-</span></div>
-                <div><span class="label"> Score: </span><span id="score">-</span></div>
-            </div>
-            
-            <div class="tip">
-                Click anywhere on the map to place your guess.
-            </div>
-        </section>
-        
-        <section class="mapWrap">
-            <div id="map"></div>
-        </section>
-    </main>
-</body>
-</html>
 
 script.js:
 ---------
@@ -144,10 +101,13 @@ function initMap(){
 }
 
 async function newRound(){
-    roundLocked = false
-    clearRoundVisuals()
-    const data = await fetchRound()
-    ans = data.ans
+    roundLocked = false;
+    clearRoundVisuals();
+    const data = await fetchRound();
+    ans = data.answer;
+    renderHintsFromBackEnd(data.hints);
+    errorKmEl = textContent = "-";
+    scoreEl = textContent = "-";
 }
 
 function placeGuess(latlng){
