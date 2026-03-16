@@ -44,7 +44,7 @@ index.html:
 
 script.js:
 ---------
-const PLACES = [
+/* const PLACES = [
     {
        name: "Bangkok, Thailand",
        lat: "13.7563",
@@ -105,7 +105,14 @@ const PLACES = [
         timezone: "UTC+10",
         coast: true
     }
-];
+]; */
+
+async function fetchRound (){
+    const res = await.fetch("https://127.0.0.1:5000/api/round");
+    return await res.json();
+}
+
+
 
 let map;
 let answer = null;
@@ -136,13 +143,11 @@ function initMap(){
     })    
 }
 
-function newRound(){
-    roundLock = false;
-    clearRoundVisuals();
-    answer = PLACES[math.floor(math.random)()*PLACES.length()];
-    renderHints(answer);
-    errorKm.textContent = "-";
-    score.textContent = "-";
+async function newRound(){
+    roundLocked = false
+    clearRoundVisuals()
+    const data = await fetchRound()
+    ans = data.ans
 }
 
 function placeGuess(latlng){
