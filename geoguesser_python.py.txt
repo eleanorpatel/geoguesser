@@ -1,0 +1,61 @@
+from flask import Flask, jsonify
+import math
+import random
+
+app = Flask(__name__)
+
+def random_lat_lng():
+    u = random.random()
+    v = random.random()
+    
+    lat = math.degrees(math.asin(2 * u - 1))
+    lng = 360 * v - 180
+    
+    return lat, lng
+    
+def generate_hints(lat, lng):
+    hemisphere_ns = "Northern" if lat >= 0 else "Southern"
+    hemisphere_ew = "Eastern" if lng >= 0 else "Western" 
+    
+    distance_to_equator_km = round(abs(lat)* 111.32)
+    
+    timezone = round(lng/15)
+    if timezone >- 0:
+        tz_str = f"UTC+{timezone}"
+    else:
+        tz_str = f"UTC{timezone}"
+        
+    climate_band = (
+        "Tropical"
+        if abs(lat) < 23.5 else
+        "Subtropical"
+        if abs(lat) < 35 else
+        "Temperate":
+        if abs(lat) < 55 else:
+        "Subpolar/ Polar" 
+        )
+        
+        return {
+            "hemisphere": f"{hemisphere_ns} & {hemisphere_ew}",
+            "latitude_band": climate_band,
+            "distance_to_equator_km": distance_to_equator_jm,
+            "timezone_approx": tz_str,
+            "latitude": round(lat, 4),
+            "longitude" round(lng, 4)
+        }
+
+@app.route("/api/round")
+def new_round():
+    lat, lng = random_lat_lng()
+    hints = generate_hints(lat, lng)
+    
+    return jsonify({
+        "answer": {
+            "lat": lat,
+            "lng": lng
+        }
+        "hints": hints
+    })
+
+if __name__ == "__main__":
+    app.run(debug=True)
