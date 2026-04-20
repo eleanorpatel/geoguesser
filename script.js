@@ -61,7 +61,7 @@
     }
 ]; */
 
-async func fetchRound(){
+async function fetchRound(){
     const res = await fetch("")
     return await res.json
 }
