@@ -145,7 +145,8 @@ function finalizeRound(guessLatLng){
     const score = Math.max(0, Math.round(5000* Math.exp(-km/2000)));
     score.textcontent = score.toLocaleString();
     answerMarker = L.marker([answer.lat, answer.lng])
-    .addTo(map).bindPopup(`actuallocation`)
+        .addTo(map)
+        .bindPopup(`Actual Location`)
     line = L.polyline([guessLatLng, ansLatLng]).addTo(map);
 }
 
