@@ -103,27 +103,16 @@ async function newRound(){
     errorKm.textContent = "-";
     score.textContent = "-";
 }
-function renderHints(p) {
-  const hemisphereNS = p.lat >= 0 ? "Northern" : "Southern";
-  const hemisphereEW = p.lng >= 0 ? "Eastern" : "Western";
-
-  const distanceToEquatorKm = Math.round(Math.abs(p.lat) * 111.32); // rough
-  const nearCoast = p.coast ? "Yes" : "No";
-
-  const hintsEl = [
-    `Continent: <span>${p.continent}</span>`,
-    `Hemisphere: <span>${hemisphereNS} & ${hemisphereEW}</span>`,
-    `Timezone (approx): <span>${p.timezone}</span>`,
-    `Driving side: <span>${p.drivingSide}</span>`,
-    `Primary language(s): <span>${p.language}</span>`,
-    `Near the coast: <span>${nearCoast}</span>`,
-    `Climate type: <span>${p.climate}</span>`,
-    `Distance to equator (rough): <span>${distanceToEquatorKm} km</span>`
+function renderHintsFromBackend(h) {
+  const hints = [
+    `Hemisphere: <span>${h.hemisphere}</span>`,
+    `Latitude band: <span>${h.latitude_band}</span>`,
+    `Approx. timezone: <span>${h.timezone_approx}</span>`,
+    `Distance to equator: <span>${h.distance_to_equator_km} km</span>`
   ];
 
-  hints.innerHTML = hintsEl.map((h) => `<li>${h}</li>`).join("");
+  hintsEl.innerHTML = hints.map(x => `<li>${x}</li>`).join("");
 }
-
 
 function placeGuess(latlng){
     if (guessMarker) guessMarker.remove();
