@@ -144,7 +144,8 @@ function finalizeRound(guessLatLng){
     errorKm.textcontent = `${kmrounded.toLocaleString()}km`;
     const score = Math.max(0, Math.round(5000* Math.exp(-km/2000)));
     score.textcontent = score.toLocaleString();
-    answerMarker = L.marker([answer.lat, answer.lng]).addTo(map).bindPopup(`Answer:${answer.name}`).openPopup();
+    answerMarker = L.marker([answer.lat, answer.lng])
+    .addTo(map).bindPopup(`actuallocation`)
     line = L.polyline([guessLatLng, ansLatLng]).addTo(map);
 }
 
