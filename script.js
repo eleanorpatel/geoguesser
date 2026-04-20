@@ -1,4 +1,4 @@
-const PLACES = [
+/*const PLACES = [
     {
        name: "Bangkok, Thailand",
        lat: "13.7563",
@@ -59,7 +59,12 @@ const PLACES = [
         timezone: "UTC+10",
         coast: true
     }
-];
+]; */
+
+async func fetchRound(){
+    const res = await fetch("")
+    return await res.json
+}
 
 let map;
 let answer = null;
@@ -90,11 +95,11 @@ function initMap(){
     })    
 }
 
-function newRound(){
+async function newRound(){
     roundLocked = false;
     clearRoundVisuals();
-    answer = PLACES[Math.floor(Math.random()*PLACES.length)];
-    renderHints(answer);
+    const data = await fetchRound();
+    answer = data.answer renderHintsFromBackEnd(data.hints);
     errorKm.textContent = "-";
     score.textContent = "-";
 }
