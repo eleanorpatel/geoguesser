@@ -32,8 +32,8 @@ def generate_hints(lat, lng):
         if abs(lat) < 23.5 else
         "Subtropical"
         if abs(lat) < 35 else
-        "Temperate":
-        if abs(lat) < 55 else:
+        "Temperate"
+        if abs(lat) < 55 else
         "Subpolar/ Polar" 
         )
         
